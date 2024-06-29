@@ -1,16 +1,15 @@
 package chess;
 
 import java.util.Arrays;
-import java.lang.Object;
-
 /**
  * A chessboard that can hold and rearrange chess pieces.
  * <p>
  * Note: You can add to this class, but you may not alter
  * the signature of the existing methods.
  */
-public class ChessBoard implements Cloneable {
-    private ChessPiece[][] squares = new ChessPiece[8][8];
+
+ public class ChessBoard implements Cloneable {
+    private final ChessPiece[][] squares = new ChessPiece[8][8];
 
     // Constructor: initializes the chessboard with empty squares
     public ChessBoard() {
@@ -30,6 +29,7 @@ public class ChessBoard implements Cloneable {
      * @param position where to add the piece to
      * @param piece    the piece to add
      */
+
     public void addPiece(ChessPosition position, ChessPiece piece) {
         int rowIndex = position.getRow() - 1;
         int colIndex = position.getColumn() - 1;
@@ -103,23 +103,23 @@ public class ChessBoard implements Cloneable {
         return Arrays.deepHashCode(squares);
     }
 
-    @Override
-    public ChessBoard clone() {
-        try {
-            ChessBoard cloned = (ChessBoard) super.clone();
-            cloned.squares = new ChessPiece[8][8];
-            for (int i = 0; i < squares.length; i++) {
-                for (int j = 0; j < squares[i].length; j++) {
-                    if (squares[i][j] != null) {
-                        cloned.squares[i][j] = squares[i][j].clone();
-                    }
-                }
-            }
-            return cloned;
-        } catch (CloneNotSupportedException e) {
-            throw new AssertionError(); // This should not happen
-        }
-    }
+//     @Override
+//     public ChessBoard clone() {
+//     try {
+//         ChessBoard cloned = (ChessBoard) super.clone();
+//         cloned.squares = new ChessPiece[8][8];
+//         for (int i = 0; i < squares.length; i++) {
+//             for (int j = 0; j < squares[i].length; j++) {
+//                 if (squares[i][j] != null) {
+//                     cloned.squares[i][j] = new ChessPiece(squares[i][j]); // Use copy constructor
+//                 }
+//             }
+//         }
+//         return cloned;
+//     } catch (CloneNotSupportedException e) {
+//         throw new AssertionError(); // This should not happen
+//     }
+// }
 
     @Override
     public String toString() {
