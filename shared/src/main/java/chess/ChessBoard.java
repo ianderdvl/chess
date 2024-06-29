@@ -103,23 +103,23 @@ import java.util.Arrays;
         return Arrays.deepHashCode(squares);
     }
 
-//     @Override
-//     public ChessBoard clone() {
-//     try {
-//         ChessBoard cloned = (ChessBoard) super.clone();
-//         cloned.squares = new ChessPiece[8][8];
-//         for (int i = 0; i < squares.length; i++) {
-//             for (int j = 0; j < squares[i].length; j++) {
-//                 if (squares[i][j] != null) {
-//                     cloned.squares[i][j] = new ChessPiece(squares[i][j]); // Use copy constructor
-//                 }
-//             }
-//         }
-//         return cloned;
-//     } catch (CloneNotSupportedException e) {
-//         throw new AssertionError(); // This should not happen
-//     }
-// }
+    @Override
+    public ChessBoard clone() {
+    try {
+        ChessBoard cloned = (ChessBoard) super.clone();
+        cloned.squares = new ChessPiece[8][8];
+        for (int i = 0; i < squares.length; i++) {
+            for (int j = 0; j < squares[i].length; j++) {
+                if (squares[i][j] != null) {
+                    cloned.squares[i][j] = new ChessPiece(squares[i][j]); // Use copy constructor
+                }
+            }
+        }
+        return cloned;
+    } catch (CloneNotSupportedException e) {
+        throw new AssertionError(); // This should not happen
+    }
+}
 
     @Override
     public String toString() {
