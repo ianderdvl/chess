@@ -9,7 +9,6 @@ import java.util.Objects;
  * the signature of the existing methods.
  */
 public class ChessPosition {
-    
     private final int row;  // The row number of the position (1-8)
     private final int col;  // The column number of the position (1-8)
 
