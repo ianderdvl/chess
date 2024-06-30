@@ -9,7 +9,7 @@ import java.util.Arrays;
  */
 
  public class ChessBoard implements Cloneable {
-    private final ChessPiece[][] squares = new ChessPiece[8][8];
+    private ChessPiece[][] squares = new ChessPiece[8][8];
 
     // Constructor: initializes the chessboard with empty squares
     public ChessBoard() {
@@ -105,21 +105,22 @@ import java.util.Arrays;
 
     @Override
     public ChessBoard clone() {
-    try {
-        ChessBoard cloned = (ChessBoard) super.clone();
-        cloned.squares = new ChessPiece[8][8];
-        for (int i = 0; i < squares.length; i++) {
-            for (int j = 0; j < squares[i].length; j++) {
-                if (squares[i][j] != null) {
-                    cloned.squares[i][j] = new ChessPiece(squares[i][j]); // Use copy constructor
+        try {
+            ChessBoard cloned = (ChessBoard) super.clone();  // Clone the ChessBoard object
+            for (int i = 0; i < squares.length; i++) {
+                for (int j = 0; j < squares[i].length; j++) {
+                    if (squares[i][j] != null) {
+                        ChessPiece originalPiece = squares[i][j];
+                        cloned.squares[i][j] = new ChessPiece(originalPiece.getTeamColor(), originalPiece.getPieceType());  // Use the constructor
+                    }
                 }
             }
+            return cloned;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();  // This should not happen
         }
-        return cloned;
-    } catch (CloneNotSupportedException e) {
-        throw new AssertionError(); // This should not happen
     }
-}
+
 
     @Override
     public String toString() {
