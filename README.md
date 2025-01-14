@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ♕ BYU CS 240 Chess
 
 This project demonstrates mastery of proper software design, client/server architecture, networking using HTTP and WebSocket, database persistence, unit testing, serialization, and security.
@@ -50,3 +51,6 @@ java -jar client/target/client-jar-with-dependencies.jar
 
 ♕ 240 Chess Client: chess.ChessPiece@7852e922
 ```
+=======
+# chess
+>>>>>>> 3083d200e50689919f9c920ea19a3c5a3ea4b400
