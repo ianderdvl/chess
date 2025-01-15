@@ -32,6 +32,7 @@ public class ChessPosition
 
     public int getRow()
     {
+
         return rank;
     }
 
@@ -42,24 +43,29 @@ public class ChessPosition
 
     public int getColumn()
     {
+
         return file;
     }
 
     @Override
     public String toString()
     {
+
         return "[" + rank + "][" + file + "]"; // Return string representation of the position
     }
 
     @Override
     public boolean equals(Object obj)
     {
+
         if (this == obj)
         {
+
             return true;
         }
         if (obj == null || getClass() != obj.getClass())
         {
+
             return false;
         }
         ChessPosition other = (ChessPosition) obj;
@@ -69,6 +75,7 @@ public class ChessPosition
     @Override
     public int hashCode()
     {
+
         return Objects.hash(rank, file); // Generate hash code based on rank and file
     }
 }
