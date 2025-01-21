@@ -10,42 +10,41 @@ import java.util.Collection;
  */
 public class ChessPiece {
 
-    public ChessPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type) {
+    // Type of the chess piece
+    private final ChessPiece.PieceType pieceType;
+
+    // Color of the chess piece
+    private final ChessGame.TeamColor teamColor;
+
+    // Constructor to initialize a chess piece
+    public ChessPiece(ChessGame.TeamColor teamColor, ChessPiece.PieceType pieceType)
+    {
+        this.teamColor = teamColor; // Initialize the team color
+        this.pieceType = pieceType; // Initialize the piece type
     }
 
-    /**
-     * The various different chess piece options
-     */
-    public enum PieceType {
-        KING,
-        QUEEN,
-        BISHOP,
+    // Enum to represent piece types
+    public enum PieceType
+    {
+        PAWN,
         KNIGHT,
+        BISHOP,
         ROOK,
-        PAWN
+        QUEEN,
+        KING
     }
 
-    /**
-     * @return Which team this chess piece belongs to
-     */
-    public ChessGame.TeamColor getTeamColor() {
-        throw new RuntimeException("Not implemented");
+    // Method to get the piece type
+    public PieceType getPieceType()
+    {
+        return pieceType;
     }
 
-    /**
-     * @return which type of chess piece this piece is
-     */
-    public PieceType getPieceType() {
-        throw new RuntimeException("Not implemented");
+    // Method to get the team color of the piece
+    public ChessGame.TeamColor getTeamColor()
+    {
+        return teamColor;
     }
-
-    /**
-     * Calculates all the positions a chess piece can move to
-     * Does not take into account moves that are illegal due to leaving the king in
-     * danger
-     *
-     * @return Collection of valid moves
-     */
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
         throw new RuntimeException("Not implemented");
     }
