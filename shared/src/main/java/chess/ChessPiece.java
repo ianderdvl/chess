@@ -131,4 +131,42 @@ public class ChessPiece {
         }
         return pawnMoves;
     }
+
+    // Method to add a pawn move to the list of moves
+    private void addPawnMove(Collection<ChessMove> moves, ChessPosition startPos, ChessPosition endPos, int forwardRow)
+    {
+        if (forwardRow == 1 || forwardRow == 8)
+        {
+            moves.add(new ChessMove(startPos, endPos, PieceType.QUEEN));
+            moves.add(new ChessMove(startPos, endPos, PieceType.BISHOP));
+            moves.add(new ChessMove(startPos, endPos, PieceType.ROOK));
+            moves.add(new ChessMove(startPos, endPos, PieceType.KNIGHT));
+        }
+        else
+        {
+            moves.add(new ChessMove(startPos, endPos, null));
+        }
+    }
+
+    // Method to get possible moves for a bishop
+    private Collection<ChessMove> getBishopMoves(ChessBoard board, ChessPosition pos, ChessGame.TeamColor color)
+    {
+        Collection<ChessMove> bishopMoves = new ArrayList<>();
+        bishopMoves.addAll(getMovesLoop(board, pos, color, 1, 1));
+        bishopMoves.addAll(getMovesLoop(board, pos, color, 1, 2));
+        bishopMoves.addAll(getMovesLoop(board, pos, color, 2, 2));
+        bishopMoves.addAll(getMovesLoop(board, pos, color, 2, 1));
+        return bishopMoves;
+    }
+
+    // Method to get possible moves for a rook
+    private Collection<ChessMove> getRookMoves(ChessBoard board, ChessPosition pos, ChessGame.TeamColor color)
+    {
+        Collection<ChessMove> rookMoves = new ArrayList<>();
+        rookMoves.addAll(getMovesLoop(board, pos, color, 1, 0));
+        rookMoves.addAll(getMovesLoop(board, pos, color, 0, 1));
+        rookMoves.addAll(getMovesLoop(board, pos, color, 2, 0));
+        rookMoves.addAll(getMovesLoop(board, pos, color, 0, 2));
+        return rookMoves;
+    }
 }
