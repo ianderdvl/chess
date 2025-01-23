@@ -169,4 +169,69 @@ public class ChessPiece {
         rookMoves.addAll(getMovesLoop(board, pos, color, 0, 2));
         return rookMoves;
     }
+
+    // Method to get possible moves for a queen
+    private Collection<ChessMove> getQueenMoves(ChessBoard board, ChessPosition pos, ChessGame.TeamColor color)
+    {
+        Collection<ChessMove> queenMoves = new ArrayList<>();
+        queenMoves.addAll(getRookMoves(board, pos, color));
+        queenMoves.addAll(getBishopMoves(board, pos, color));
+        return queenMoves;
+    }
+
+    // Method to get possible moves for a knight
+    private Collection<ChessMove> getKnightMoves(ChessBoard board, ChessPosition pos, ChessGame.TeamColor color)
+    {
+        Collection<ChessMove> knightMoves = new ArrayList<>();
+        Collection<ChessPosition> potentialMoves = new ArrayList<>();
+
+        potentialMoves.add(new ChessPosition(pos.getRow() + 2, pos.getColumn() + 1));
+        potentialMoves.add(new ChessPosition(pos.getRow() + 2, pos.getColumn() - 1));
+        potentialMoves.add(new ChessPosition(pos.getRow() - 2, pos.getColumn() + 1));
+        potentialMoves.add(new ChessPosition(pos.getRow() - 2, pos.getColumn() - 1));
+        potentialMoves.add(new ChessPosition(pos.getRow() + 1, pos.getColumn() + 2));
+        potentialMoves.add(new ChessPosition(pos.getRow() + 1, pos.getColumn() - 2));
+        potentialMoves.add(new ChessPosition(pos.getRow() - 1, pos.getColumn() + 2));
+        potentialMoves.add(new ChessPosition(pos.getRow() - 1, pos.getColumn() - 2));
+
+        for (ChessPosition move : potentialMoves)
+        {
+            if (isValidPosition(move.getRow(), move.getColumn()))
+            {
+                if (board.getPiece(move) == null || board.getPiece(move).getTeamColor() != color)
+                {
+                    knightMoves.add(new ChessMove(pos, move, null));
+                }
+            }
+        }
+        return knightMoves;
+    }
+
+    // Method to get possible moves for a king
+    private Collection<ChessMove> getKingMoves(ChessBoard board, ChessPosition pos, ChessGame.TeamColor color)
+    {
+        Collection<ChessMove> kingMoves = new ArrayList<>();
+        Collection<ChessPosition> potentialMoves = new ArrayList<>();
+
+        potentialMoves.add(new ChessPosition(pos.getRow(), pos.getColumn() + 1));
+        potentialMoves.add(new ChessPosition(pos.getRow(), pos.getColumn() - 1));
+        potentialMoves.add(new ChessPosition(pos.getRow() + 1, pos.getColumn()));
+        potentialMoves.add(new ChessPosition(pos.getRow() - 1, pos.getColumn()));
+        potentialMoves.add(new ChessPosition(pos.getRow() + 1, pos.getColumn() + 1));
+        potentialMoves.add(new ChessPosition(pos.getRow() + 1, pos.getColumn() - 1));
+        potentialMoves.add(new ChessPosition(pos.getRow() - 1, pos.getColumn() + 1));
+        potentialMoves.add(new ChessPosition(pos.getRow() - 1, pos.getColumn() - 1));
+
+        for (ChessPosition move : potentialMoves)
+        {
+            if (isValidPosition(move.getRow(), move.getColumn()))
+            {
+                if (board.getPiece(move) == null || board.getPiece(move).getTeamColor() != color)
+                {
+                    kingMoves.add(new ChessMove(pos, move, null));
+                }
+            }
+        }
+        return kingMoves;
+    }
 }
