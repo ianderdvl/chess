@@ -1,6 +1,9 @@
 package chess;
 
+import java.util.ArrayList;
 import java.util.Collection;
+
+import com.google.gson.Gson;
 
 /**
  * For a class that can manage a chess game, making moves on a board
@@ -8,34 +11,41 @@ import java.util.Collection;
  * Note: You can add to this class, but you may not alter
  * signature of the existing methods.
  */
-public class ChessGame {
 
-    public ChessGame() {
+public class ChessGame
+{
 
+    // Enum to represent team colors
+    public enum TeamColor
+    {
+        BLACK,
+        WHITE
     }
 
-    /**
-     * @return Which team's turn it is
-     */
-    public TeamColor getTeamTurn() {
-        throw new RuntimeException("Not implemented");
+    // Current turn of the game
+    private TeamColor currentTurn;
+
+    // Chessboard for the game
+    private ChessBoard board;
+
+    // Constructor to initialize a new chess game
+    public ChessGame()
+    {
+        this.currentTurn = TeamColor.WHITE; // Set initial turn to white
+        this.board = new ChessBoard(); // Initialize the chessboard
+        board.resetBoard(); // Set up the board with initial positions
     }
 
-    /**
-     * Set's which teams turn it is
-     *
-     * @param team the team whose turn it is
-     */
-    public void setTeamTurn(TeamColor team) {
-        throw new RuntimeException("Not implemented");
+    // Method to get the current team's turn
+    public TeamColor getTeamTurn()
+    {
+        return this.currentTurn;
     }
 
-    /**
-     * Enum identifying the 2 possible teams in a chess game
-     */
-    public enum TeamColor {
-        WHITE,
-        BLACK
+    // Method to set the current team's turn
+    public void setTeamTurn(TeamColor team)
+    {
+        this.currentTurn = team;
     }
 
     /**
