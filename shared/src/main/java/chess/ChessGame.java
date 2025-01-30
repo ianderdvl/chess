@@ -55,8 +55,29 @@ public class ChessGame
      * @return Set of valid moves for requested piece, or null if no piece at
      * startPosition
      */
-    public Collection<ChessMove> validMoves(ChessPosition startPosition) {
-        throw new RuntimeException("Not implemented");
+    // Method to get valid moves for a piece at a given position
+    public Collection<ChessMove> validMoves(ChessPosition startPosition)
+    {
+        ChessPiece currentPiece = board.getPiece(startPosition);
+        if (currentPiece == null)
+        {
+            return null;
+        }
+
+        Collection<ChessMove> validMoves = new ArrayList<>();
+        Collection<ChessMove> possibleMoves = currentPiece.pieceMoves(board, startPosition);
+
+        for (ChessMove move : possibleMoves)
+        {
+            ChessBoard tempBoard = board.clone();
+            testMove(move);
+            if (!isInCheck(currentPiece.getTeamColor()))
+            {
+                validMoves.add(move);
+            }
+            board = tempBoard;
+        }
+        return validMoves;
     }
 
     /**
