@@ -80,14 +80,61 @@ public class ChessGame
         return validMoves;
     }
 
-    /**
-     * Makes a move in a chess game
-     *
-     * @param move chess move to preform
-     * @throws InvalidMoveException if move is invalid
-     */
-    public void makeMove(ChessMove move) throws InvalidMoveException {
-        throw new RuntimeException("Not implemented");
+    // Method to test a move
+    public void testMove(ChessMove move)
+    {
+        ChessPiece piece = board.getPiece(move.getStartPosition());
+        if (piece == null)
+        {
+            return;
+        }
+
+        if (move.getPromotionPiece() == null)
+        {
+            board.addPiece(move.getEndPosition(), piece);
+        }
+        else
+        {
+            board.addPiece(move.getEndPosition(), new ChessPiece(piece.teamColor(), move.getPromotionPiece()));
+        }
+        board.addPiece(move.getStartPosition(), null);
+    }
+
+    // Method to make a move
+    public void makeMove(ChessMove move) throws InvalidMoveException
+    {
+        ChessPiece piece = board.getPiece(move.getStartPosition());
+        if (piece == null)
+        {
+            throw new InvalidMoveException("No piece at the start position.");
+        }
+
+        if (!isValidPosition(move.getStartPosition()) || !isValidPosition(move.getEndPosition()))
+        {
+            throw new InvalidMoveException("Invalid move positions.");
+        }
+
+        if (piece.teamColor() != getTeamTurn())
+        {
+            throw new InvalidMoveException("Not your turn!");
+        }
+
+        if (!validMoves(move.getStartPosition()).contains(move))
+        {
+            throw new InvalidMoveException("Invalid move.");
+        }
+
+        if (move.getPromotionPiece() == null)
+        {
+            board.addPiece(move.getEndPosition(), piece);
+        }
+        else
+        {
+            board.addPiece(move.getEndPosition(), new ChessPiece(piece.teamColor(), move.getPromotionPiece()));
+        }
+        board.addPiece(move.getStartPosition(), null);
+
+        switchTurn();
     }
 
     /**
