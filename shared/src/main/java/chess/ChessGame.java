@@ -95,7 +95,7 @@ public class ChessGame
         }
         else
         {
-            board.addPiece(move.getEndPosition(), new ChessPiece(piece.teamColor(), move.getPromotionPiece()));
+            board.addPiece(move.getEndPosition(), new ChessPiece(piece.getTeamColor(), move.getPromotionPiece()));
         }
         board.addPiece(move.getStartPosition(), null);
     }
@@ -114,7 +114,7 @@ public class ChessGame
             throw new InvalidMoveException("Invalid move positions.");
         }
 
-        if (piece.teamColor() != getTeamTurn())
+        if (piece.getTeamColor() != getTeamTurn())
         {
             throw new InvalidMoveException("Not your turn!");
         }
@@ -130,11 +130,32 @@ public class ChessGame
         }
         else
         {
-            board.addPiece(move.getEndPosition(), new ChessPiece(piece.teamColor(), move.getPromotionPiece()));
+            board.addPiece(move.getEndPosition(), new ChessPiece(piece.getTeamColor(), move.getPromotionPiece()));
         }
         board.addPiece(move.getStartPosition(), null);
 
         switchTurn();
+    }
+
+    // Method to check if a position is valid
+    private boolean isValidPosition(ChessPosition position)
+    {
+        int row = position.getRow();
+        int col = position.getColumn();
+        return row > 0 && row <= 8 && col > 0 && col <= 8;
+    }
+
+    // Method to switch turns
+    private void switchTurn()
+    {
+        if (currentTurn == TeamColor.WHITE)
+        {
+            setTeamTurn(TeamColor.BLACK);
+        }
+        else
+        {
+            setTeamTurn(TeamColor.WHITE);
+        }
     }
 
     /**
