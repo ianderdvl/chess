@@ -187,6 +187,25 @@ public class ChessGame
         return false;
     }
 
+    // Method to get positions of all pieces of a team
+    public Collection<ChessPosition> getTeamPositions(TeamColor color)
+    {
+        Collection<ChessPosition> positions = new ArrayList<>();
+        for (int row = 1; row <= 8; row++)
+        {
+            for (int col = 1; col <= 8; col++)
+            {
+                ChessPosition position = new ChessPosition(row, col);
+                ChessPiece piece = board.getPiece(position);
+                if (piece != null && piece.teamColor() == color)
+                {
+                    positions.add(position);
+                }
+            }
+        }
+        return positions;
+    }
+
     /**
      * Determines if the given team is in checkmate
      *
