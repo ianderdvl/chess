@@ -197,13 +197,31 @@ public class ChessGame
             {
                 ChessPosition position = new ChessPosition(row, col);
                 ChessPiece piece = board.getPiece(position);
-                if (piece != null && piece.teamColor() == color)
+                if (piece != null && piece.getTeamColor() == color)
                 {
                     positions.add(position);
                 }
             }
         }
         return positions;
+    }
+
+    // Method to find the king's position of a team
+    public ChessPosition findKing(TeamColor color)
+    {
+        for (int row = 1; row <= 8; row++)
+        {
+            for (int col = 1; col <= 8; col++)
+            {
+                ChessPosition position = new ChessPosition(row, col);
+                ChessPiece piece = board.getPiece(position);
+                if (piece != null && piece.getTeamColor() == color && piece.getPieceType() == ChessPiece.PieceType.KING)
+                {
+                    return position;
+                }
+            }
+        }
+        return null;
     }
 
     /**
