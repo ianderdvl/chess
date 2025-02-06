@@ -138,7 +138,7 @@ public class ChessBoard implements Cloneable
                     {
 
                         ChessPiece originalPiece = boardSquares[i][j];
-                        clonedBoard.boardSquares[i][j] = new ChessPiece(originalPiece.getTeamColor(), originalPiece.getPieceType());
+                        clonedBoard.boardSquares[i][j] = new ChessPiece(originalPiece.teamColor(), originalPiece.pieceType());
                     }
                 }
             }
