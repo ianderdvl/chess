@@ -239,15 +239,21 @@ public class ChessGame
         return true;
     }
 
-    /**
-     * Determines if the given team is in stalemate, which here is defined as having
-     * no valid moves
-     *
-     * @param teamColor which team to check for stalemate
-     * @return True if the specified team is in stalemate, otherwise false
-     */
-    public boolean isInStalemate(TeamColor teamColor) {
-        throw new RuntimeException("Not implemented");
+    // Method to check if a team is in stalemate
+    public boolean isInStalemate(TeamColor teamColor)
+    {
+        if (isInCheck(teamColor))
+        {
+            return false;
+        }
+        for (ChessPosition pos : getTeamPositions(teamColor))
+        {
+            if (!validMoves(pos).isEmpty())
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
